@@ -8,8 +8,42 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController , UITableViewDelegate {
 
+    @IBOutlet weak var sliderValue: UISlider!
+    
+    
+    @IBOutlet weak var table: UITableView!
+   
+    //var number = Int(sliderValue)
+    
+    @IBAction func sliderMoved(sender: AnyObject) {
+        
+        table.reloadData()
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return 20
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
+    
+        let cell = UITableViewCell(style:UITableViewCellStyle.Default, reuseIdentifier: "Cell")
+        
+        let timestable =  Int (sliderValue.value)
+    
+        let productValue = String(timestable * (indexPath.row + 1))
+        
+        cell.textLabel?.text = "\(timestable) *  \(indexPath.row + 1) = \(productValue)"
+            
+            //String(timestable * (indexPath.row + 1))
+            //String(timestable * indexPath.row)
+        return cell
+        
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
